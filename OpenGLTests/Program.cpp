@@ -20,8 +20,9 @@ void processInput(GLFWwindow* window)
 int main()
 {
 	glfwInit();  // Begin GLFW
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // For Mac support
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);  // Define GL version
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);  // Define GL version
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);  // Define GL version - 4.1 because Mac doesn't support 4.2 to 4.6
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // Sets whether or not to use post 3.0 GL features, pre 3.0 GL features, or both
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);  // Creates the GL window
@@ -39,6 +40,17 @@ int main()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+
+	float vertices[] = {
+	-0.5f, -0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	 0.0f,  0.5f, 0.0f
+	};
+
+	GLuint VBO;
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	while (!glfwWindowShouldClose(window))
 	{
