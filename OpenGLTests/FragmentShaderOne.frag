@@ -8,4 +8,4 @@ uniform vec4 ourColorUniform;  // A uniform is a global variable that can be cha
 void main()
 {
 	FragColor = ourColorUniform;
-};
+}
