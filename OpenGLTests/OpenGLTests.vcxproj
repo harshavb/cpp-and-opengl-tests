@@ -161,9 +161,9 @@
     <ClCompile Include="UsefulMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FragmentShaderOne.glsl" />
-    <None Include="FragmentShaderTwo.glsl" />
-    <None Include="VertexShaderOne.glsl" />
+    <None Include="FragmentShaderOne.frag" />
+    <None Include="FragmentShaderTwo.frag" />
+    <None Include="VertexShaderOne.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

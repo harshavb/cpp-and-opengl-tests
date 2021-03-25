@@ -86,23 +86,6 @@ void TestTwo::runTest()
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	// Defines vertices of triangles to be drawn
-	/*float vertices[] = {
-		0.5f,  0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
-	};*/
-
-	/*float exerciseOneVertices[] = {
-		-0.5f, -0.25f, 0.0f,
-		0.0f, -0.25f, 0.0f,
-		-0.25f,  0.25f, 0.0f,
-		0.5f, -0.25f, 0.0f,
-		0.0f, -0.25f, 0.0f,
-		0.25f,  0.25f, 0.0f
-	};*/
-
 	float exerciseTwoVerticesOne[] = {
 		-0.5f, -0.25f, 0.0f, 5.0f,
 		0.0f, -0.25f, 0.0f, 5.0f,

@@ -70,13 +70,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="VertexShaderOne.glsl">
+    <None Include="FragmentShaderOne.frag">
       <Filter>Source Files\Shaders</Filter>
     </None>
-    <None Include="FragmentShaderOne.glsl">
+    <None Include="FragmentShaderTwo.frag">
       <Filter>Source Files\Shaders</Filter>
     </None>
-    <None Include="FragmentShaderTwo.glsl">
+    <None Include="VertexShaderOne.vert">
       <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>
