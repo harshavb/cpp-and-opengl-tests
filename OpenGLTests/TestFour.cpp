@@ -74,7 +74,6 @@ void TestFour::runTest()
 
 	// First bind VAO, then bind and set VBO(s)/EBO(s), then configure vertex attribute(s)
 	glBindVertexArray(VAOs[0]);
-	;
 	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(exerciseTwoVerticesOne), exerciseTwoVerticesOne, GL_STATIC_DRAW);
 
