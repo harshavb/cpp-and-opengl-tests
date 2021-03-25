@@ -25,8 +25,8 @@ void TestFour::runTest()
 	}
 
 	// Creates the shader programs for each of the triangles
-	Shader shaderProgram("VertexShaderOne.glsl", "FragmentShaderOne.glsl");
-	Shader shaderProgramTwo("VertexShaderOne.glsl", "FragmentShaderTwo.glsl");
+	Shader shaderProgram("VertexShaderOne.vert", "FragmentShaderOne.frag");
+	Shader shaderProgramTwo("VertexShaderOne.vert", "FragmentShaderTwo.frag");
 
 	// Defines vertices of triangles to be drawn
 	/*float vertices[] = {
