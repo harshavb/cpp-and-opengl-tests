@@ -1,13 +1,18 @@
-#include "TestTwo.h"
+#include "TestThree.h"
 
 // GLSL shader that simply passes location data to output
 static const char* vertexShaderSource =
 	"#version 410 core\n"
 	"layout(location = 0) in vec3 aPos;\n"
-	"layout(location = 1) in float garbage_position_duplicate;\n"
+	"layout(location = 1) in vec3 vertexColor;"
+	"layout(location = 2) in float garbage_position_duplicate;\n"
+
+	"out vec3 ourColor;\n"
+
 	"void main()\n"
 	"{\n"
-	"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+	"   gl_Position = vec4(aPos, 1.0f);\n"
+	"	ourColor = vertexColor;\n"
 	"}\0";
 
 // GLSL shader that outputs a FragColor
@@ -15,23 +20,25 @@ static const char* fragmentShaderSource =
 	"#version 410 core\n"
 	"out vec4 FragColor;\n"
 	""
-	"uniform vec4 ourColor;\n"  // A uniform is a global variable that can be changed anywhere outside the shader
+	"uniform vec4 ourColorUniform;\n"  // A uniform is a global variable that can be changed anywhere outside the shader
 	""
 	"void main()\n"
 	"{\n"
-	"	FragColor = ourColor;\n"
+	"	FragColor = ourColorUniform;\n"
 	"}\0";
 
 // Another GLSL shader that outputs a different FragColor
 static const char* fragmentShaderSourceTwo =
 	"#version 410 core\n"
 	"out vec4 FragColor;\n"
+	"in vec3 ourColor;\n"
+
 	"void main()\n"
 	"{\n"
-	"	FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
+	"	FragColor = vec4(ourColor, 1.0f);\n"
 	"}\0";
 
-void TestTwo::runTest()
+void TestThree::runTest()
 {
 	glfwInit();  // Begin GLFW
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // For Mac support
@@ -72,7 +79,7 @@ void TestTwo::runTest()
 	glLinkProgram(shaderProgram);
 
 	// Retreives global variable address of ourColor and stores it
-	int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+	int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColorUniform");
 
 	// Reuses fragment shader variable but with a different source
 	glShaderSource(fragmentShader, 1, &fragmentShaderSourceTwo, NULL);
@@ -110,9 +117,9 @@ void TestTwo::runTest()
 	};
 
 	float exerciseTwoVerticesTwo[] = {
-		0.5f, -0.25f, 0.0f, 5.0f,
-		0.0f, -0.25f, 0.0f, 5.0f,
-		0.25f,  0.25f, 0.0f, 5.0f
+		0.5f, -0.25f, 0.0f, 1.0f, 0.0f, 0.0f, 5.0f,
+		0.0f, -0.25f, 0.0f, 0.0f, 1.0f, 0.0f, 5.0f,
+		0.25f,  0.25f, 0.0f, 0.0f, 0.0f, 1.0f, 5.0f
 	};
 
 	// Defines indices of vertices of triangles to be drawn
@@ -137,10 +144,11 @@ void TestTwo::runTest()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(exerciseTwoVerticesOne), exerciseTwoVerticesOne, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
+	glDisableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
 	// Also allowed: glVertexAttribPointer(glGetAttribLocation("aPos"), 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)(3 * sizeof(float)));
 
 	glBindVertexArray(VAOs[1]);
 
@@ -152,8 +160,10 @@ void TestTwo::runTest()
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (void*)(6 * sizeof(float)));
 
 	// Unbinds the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

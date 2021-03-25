@@ -6,7 +6,7 @@
 #include "UsefulMethods.h"
 using namespace std;
 
-class TestOne
+class TestThree
 {
 public:
 	static void runTest();

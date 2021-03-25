@@ -1,11 +1,10 @@
 #include "TestOne.h"
-#include "UsefulMethods.h"
 
 // GLSL shader that simply passes location data to output
 static const char* vertexShaderSource =
 	"#version 410 core\n"
 	"layout(location = 0) in vec3 aPos;\n"
-	"layout(location = 1) in vec3 garbage_position_duplicate;\n"
+	"layout(location = 1) in float garbage_position_duplicate;\n"
 	"void main()\n"
 	"{\n"
 	"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
@@ -29,7 +28,7 @@ static const char* fragmentShaderSourceTwo =
 	"	FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
 	"}\0";
 
-void TestOne::runTestOne()
+void TestOne::runTest()
 {
 	glfwInit();  // Begin GLFW
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // For Mac support
@@ -135,8 +134,7 @@ void TestOne::runTestOne()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
 	// Also allowed: glVertexAttribPointer(glGetAttribLocation("aPos"), 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
-
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)(3 * sizeof(float)));
 
 	glBindVertexArray(VAOs[1]);
 
@@ -149,7 +147,7 @@ void TestOne::runTestOne()
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (void*)(3 * sizeof(float)));
 
 	// Unbinds the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

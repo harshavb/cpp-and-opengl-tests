@@ -4,9 +4,10 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "UsefulMethods.h"
+#include "Shader.h"
 using namespace std;
 
-class TestOne
+class TestFour
 {
 public:
 	static void runTest();

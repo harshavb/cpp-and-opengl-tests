@@ -143,16 +143,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Program.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="TestFour.h" />
     <ClInclude Include="TestOne.h" />
+    <ClInclude Include="TestThree.h" />
     <ClInclude Include="TestTwo.h" />
     <ClInclude Include="UsefulMethods.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="TestFour.cpp" />
     <ClCompile Include="TestOne.cpp" />
+    <ClCompile Include="TestThree.cpp" />
     <ClCompile Include="TestTwo.cpp" />
     <ClCompile Include="UsefulMethods.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FragmentShaderOne.glsl" />
+    <None Include="FragmentShaderTwo.glsl" />
+    <None Include="VertexShaderOne.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
