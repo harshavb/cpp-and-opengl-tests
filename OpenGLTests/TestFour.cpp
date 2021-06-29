@@ -2,10 +2,10 @@
 
 void TestFour::runTest()
 {
-	glfwInit();  // Begin GLFW
+	glfwInit();  // Begins GLFW
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // For Mac support
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);  // Define GL version
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);  // Define GL version - 4.1 because Mac doesn't support 4.2 to 4.6
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);  // Defines GL version
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);  // Defines GL version - 4.1 because Mac doesn't support 4.2 to 4.6
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // Sets whether or not to use post 3.0 GL features, pre 3.0 GL features, or both
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGLTests", NULL, NULL);  // Creates the GL window
@@ -15,10 +15,10 @@ void TestFour::runTest()
 		glfwTerminate();
 		return;
 	}
-	glfwMakeContextCurrent(window);  // Sets window to run GL on a thread
+	glfwMakeContextCurrent(window);  // Sets window to run GL
 	glfwSetFramebufferSizeCallback(window, UsefulMethods::framebuffer_size_callback);  // Defines what function to run whenever window is resized
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))  // Enables glad stuff to work, probably
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))  // Allows GLAD to read functions from driver (OS specific without GLAD)
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return;
@@ -46,16 +46,14 @@ void TestFour::runTest()
 		1, 2, 3
 	};
 
-	// Generate a VBO, EBO, and a VAO for storing vertices and how to deal with those vertices
+	// Generates a VBO, EBO, and a VAO for storing vertices and how to deal with those vertices
 	// GLuint VBO, EBO, VAO;
 	GLuint VBOs[2], VAOs[2];
-	/*glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);*/
+
 	glGenVertexArrays(2, VAOs);
 	glGenBuffers(2, VBOs);
 
-	// First bind VAO, then bind and set VBO(s)/EBO(s), then configure vertex attribute(s)
+	// First binds VAO(s), then binds and sets VBO(s)/EBO(s), then configures vertex attribute(s)
 	glBindVertexArray(VAOs[0]);
 	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(exerciseTwoVerticesOne), exerciseTwoVerticesOne, GL_STATIC_DRAW);
@@ -72,8 +70,8 @@ void TestFour::runTest()
 	glBindBuffer(GL_ARRAY_BUFFER, VBOs[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(exerciseTwoVerticesTwo), exerciseTwoVerticesTwo, GL_STATIC_DRAW);
 
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	// glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
@@ -86,7 +84,7 @@ void TestFour::runTest()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	// Wireframe Mode
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -99,8 +97,9 @@ void TestFour::runTest()
 
 		shaderProgram.use();
 
-		glBindVertexArray(VAOs[0]);  // Notably unnecessary as there is only 1 VAO, but here for consistency
-		glDrawArrays(GL_TRIANGLES, 0, 3);  //Draws the verticies in the VBO
+		// Draws based on the first VAO
+		glBindVertexArray(VAOs[0]);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		// Updates color based on time and passes it to global variable
 		float greenValue = (sin(glfwGetTime()) / 2.0f) + 0.5f;
@@ -108,21 +107,19 @@ void TestFour::runTest()
 
 		shaderProgramTwo.use();
 
+		// Draws based on the second VAO
 		glBindVertexArray(VAOs[1]);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		// glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
-		// Check and call events and swap the buffers (?)
+		// Swaps the buffers then checks and calls events (?)
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	// De-allocates resources
-	/*glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);*/
-
 	glDeleteVertexArrays(2, VAOs);
 	glDeleteBuffers(2, VBOs);
 
