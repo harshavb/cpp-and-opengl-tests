@@ -28,4 +28,3 @@ public:
     void setFloat(const std::string& name, float value) const;
     void setVec4(const std::string& name, float val1, float val2, float val3, float val4) const;
 };
-

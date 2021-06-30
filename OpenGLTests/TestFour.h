@@ -12,4 +12,3 @@ class TestFour
 public:
 	static void runTest();
 };
-

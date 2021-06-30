@@ -10,4 +10,3 @@ public:
 	// Processes input (wow ik amazing)
 	static void processInput(GLFWwindow* window);
 };
-

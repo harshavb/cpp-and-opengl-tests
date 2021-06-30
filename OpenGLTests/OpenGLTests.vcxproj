@@ -144,6 +144,8 @@
   <ItemGroup>
     <ClInclude Include="Program.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TestFive.h" />
     <ClInclude Include="TestFour.h" />
     <ClInclude Include="TestOne.h" />
     <ClInclude Include="TestThree.h" />
@@ -154,6 +156,8 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="TestFive.cpp" />
     <ClCompile Include="TestFour.cpp" />
     <ClCompile Include="TestOne.cpp" />
     <ClCompile Include="TestThree.cpp" />
@@ -161,9 +165,15 @@
     <ClCompile Include="UsefulMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FragmentShaderOne.frag" />
-    <None Include="FragmentShaderTwo.frag" />
-    <None Include="VertexShaderOne.vert" />
+    <None Include="..\Debug\FragmentShaderOne.frag" />
+    <None Include="..\Debug\FragmentShaderThree.frag" />
+    <None Include="..\Debug\FragmentShaderTwo.frag" />
+    <None Include="..\Debug\VertexShaderOne.vert" />
+    <None Include="..\Debug\VertexShaderTwo.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Debug\awesomeface.png" />
+    <Image Include="..\Debug\container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

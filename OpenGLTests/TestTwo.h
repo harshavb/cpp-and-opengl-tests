@@ -11,4 +11,3 @@ class TestTwo
 public:
 	static void runTest();
 };
-

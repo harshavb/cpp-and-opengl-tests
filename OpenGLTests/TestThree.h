@@ -11,4 +11,3 @@ class TestThree
 public:
 	static void runTest();
 };
-
