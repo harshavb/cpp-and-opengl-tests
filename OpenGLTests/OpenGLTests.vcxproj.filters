@@ -48,6 +48,9 @@
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestSix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -80,6 +83,9 @@
     <ClCompile Include="stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestSix.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Debug\FragmentShaderThree.frag">
@@ -95,6 +101,9 @@
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="..\Debug\VertexShaderTwo.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\Debug\VertexShaderThree.vert">
       <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>

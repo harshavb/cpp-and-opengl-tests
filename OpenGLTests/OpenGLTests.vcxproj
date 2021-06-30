@@ -72,6 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)Dependencies\includes;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -148,6 +149,7 @@
     <ClInclude Include="TestFive.h" />
     <ClInclude Include="TestFour.h" />
     <ClInclude Include="TestOne.h" />
+    <ClInclude Include="TestSix.h" />
     <ClInclude Include="TestThree.h" />
     <ClInclude Include="TestTwo.h" />
     <ClInclude Include="UsefulMethods.h" />
@@ -160,6 +162,7 @@
     <ClCompile Include="TestFive.cpp" />
     <ClCompile Include="TestFour.cpp" />
     <ClCompile Include="TestOne.cpp" />
+    <ClCompile Include="TestSix.cpp" />
     <ClCompile Include="TestThree.cpp" />
     <ClCompile Include="TestTwo.cpp" />
     <ClCompile Include="UsefulMethods.cpp" />
@@ -169,6 +172,7 @@
     <None Include="..\Debug\FragmentShaderThree.frag" />
     <None Include="..\Debug\FragmentShaderTwo.frag" />
     <None Include="..\Debug\VertexShaderOne.vert" />
+    <None Include="..\Debug\VertexShaderThree.vert" />
     <None Include="..\Debug\VertexShaderTwo.vert" />
   </ItemGroup>
   <ItemGroup>

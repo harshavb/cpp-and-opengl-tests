@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 using namespace std;
 
 class Shader
@@ -27,4 +29,5 @@ public:
     void setInt(const std::string& name, int value) const;
     void setFloat(const std::string& name, float value) const;
     void setVec4(const std::string& name, float val1, float val2, float val3, float val4) const;
+    void setMat4(const std::string& name, glm::mat4 mat) const;
 };
