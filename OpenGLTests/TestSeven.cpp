@@ -1,6 +1,6 @@
-#include "TestSix.h"
+#include "TestSeven.h"
 
-void TestSix::runTest()
+void TestSeven::runTest()
 {
 	glfwInit();  // Begins GLFW
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // For Mac support
@@ -26,52 +26,87 @@ void TestSix::runTest()
 	}
 
 	// Creates the shader programs for each of the triangles
-	Shader shaderProgram("VertexShaderThree.vert", "FragmentShaderThree.frag");
+	Shader shaderProgram("VertexShaderFour.vert", "FragmentShaderFour.frag");
 
-	// Rectangle vertices - duplicate vertices only listed once
+	// Cube Vertices
+	float vertices[] = 
+	{
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+	};
+
+	// Cube Struct
 	struct Vertex 
 	{
 		GLfloat position[3];
-		GLfloat color[3];
 		GLfloat uvCoords[2];
 	};
 
-	Vertex topRight{ { 0.5f, 0.5f, 0.0f }, { 1.0f, 0.0f, 0.0f }, { 1.0f, 1.0f } };
-	Vertex bottomRight{ { 0.5f, -0.5f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 1.0f, 0.0f } };
-	Vertex bottomLeft{ { -0.5f, -0.5f, 0.0f } , { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f } };
-	Vertex topLeft{ { -0.5f, 0.5f, 0.0f }, { 1.0f, 1.0f, 0.0f }, { 0.0f, 1.0f } };
+	// Converts cube vertices to structs
+	Vertex cubeVertices[36];
+	for (int i = 0; i < 36; i++)
+	{
+		Vertex cubeVertex;
+		copy(vertices + i * 5, vertices + i * 5 + 4, cubeVertex.position);
+		copy(vertices + i * 5 + 3, vertices + i * 5 + 5, cubeVertex.uvCoords);
+		cubeVertices[i] = cubeVertex;
+	}
 
-	Vertex eboRectangleVertices[] = { topRight, bottomRight, bottomLeft, topLeft };
-
-	// Defines indices of vertices of triangles to be drawn
-	GLuint indices[] = {
-		0, 1, 3,
-		1, 2, 3
-	};
-
-	// Generates a VBO, EBO, and a VAO for storing vertices and how to deal with those vertices
-	// GLuint VBO, EBO, VAO;
-	GLuint VAO, VBO, EBO;
+	// Generates a VBO and a VAO for storing vertices and how to deal with those vertices
+	GLuint VAO, VBO;
 
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
 
 	// First binds VAO(s), then binds and sets VBO(s)/EBO(s), then configures vertex attribute(s)
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(eboRectangleVertices), eboRectangleVertices, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvCoords));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvCoords));
 
 	// Generates the textures
 	GLuint textures[2];
@@ -118,8 +153,31 @@ void TestSix::runTest()
 	GLfloat mixPercent = 0.2f;
 	shaderProgram.setFloat("mixPercent", mixPercent);
 
+	// Projection Matrix
+	glm::mat4 projection;
+	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+	shaderProgram.setMat4("projection", projection);
+
 	// Wireframe Mode
 	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	// Enables depth testing
+	glEnable(GL_DEPTH_TEST);
+
+	// Cube Coordinates
+	glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -138,17 +196,9 @@ void TestSix::runTest()
 
 		shaderProgram.setFloat("mixPercent", mixPercent);
 
-		// Creates a matrix that scales by half, rotates by glfwGetTime(), then translates to the bottom right
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
-		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-
-		shaderProgram.setMat4("transform", trans);
-
 		// Render
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram.use();
 
@@ -159,16 +209,28 @@ void TestSix::runTest()
 		glBindTexture(GL_TEXTURE_2D, textures[1]);
 
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-		// Creates a matrix that scales by time, then translates to the top left
-		trans = glm::mat4(1.0f);
-		trans = glm::translate(trans, glm::vec3(-0.5f, 0.5f, 0.0f));
-		trans = glm::scale(trans, glm::vec3(abs(sin(glfwGetTime()))));
+		// Sets model matrix for each cube
+		for (unsigned int i = 0; i < 10; i++)
+		{
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, cubePositions[i]);
 
-		shaderProgram.setMat4("transform", trans);
+			float angle = 20.0f * i;
+			model = glm::rotate(model, float(glfwGetTime()) * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			shaderProgram.setMat4("model", model);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}
+
+		// Sets the view matrix
+		glm::mat4 view = glm::mat4(1.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -2.5f + cos(float(glfwGetTime()))));
+		view = glm::rotate(view, float(glfwGetTime()), glm::vec3(0.0f, 0.0f, 1.0f));
+
+		shaderProgram.setMat4("view", view);
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		// Swaps the buffers then checks and calls events (?)
 		glfwSwapBuffers(window);
@@ -178,7 +240,6 @@ void TestSix::runTest()
 	// De-allocates resources
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
 
 	glfwTerminate();
 }

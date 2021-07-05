@@ -149,6 +149,7 @@
     <ClInclude Include="TestFive.h" />
     <ClInclude Include="TestFour.h" />
     <ClInclude Include="TestOne.h" />
+    <ClInclude Include="TestSeven.h" />
     <ClInclude Include="TestSix.h" />
     <ClInclude Include="TestThree.h" />
     <ClInclude Include="TestTwo.h" />
@@ -162,15 +163,18 @@
     <ClCompile Include="TestFive.cpp" />
     <ClCompile Include="TestFour.cpp" />
     <ClCompile Include="TestOne.cpp" />
+    <ClCompile Include="TestSeven.cpp" />
     <ClCompile Include="TestSix.cpp" />
     <ClCompile Include="TestThree.cpp" />
     <ClCompile Include="TestTwo.cpp" />
     <ClCompile Include="UsefulMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Debug\FragmentShaderFour.frag" />
     <None Include="..\Debug\FragmentShaderOne.frag" />
     <None Include="..\Debug\FragmentShaderThree.frag" />
     <None Include="..\Debug\FragmentShaderTwo.frag" />
+    <None Include="..\Debug\VertexShaderFour.vert" />
     <None Include="..\Debug\VertexShaderOne.vert" />
     <None Include="..\Debug\VertexShaderThree.vert" />
     <None Include="..\Debug\VertexShaderTwo.vert" />

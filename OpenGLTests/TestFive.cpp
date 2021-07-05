@@ -15,6 +15,7 @@ void TestFive::runTest()
 		glfwTerminate();
 		return;
 	}
+
 	glfwMakeContextCurrent(window);  // Sets window to run GL
 	glfwSetFramebufferSizeCallback(window, UsefulMethods::framebuffer_size_callback);  // Defines what function to run whenever window is resized
 
@@ -28,7 +29,8 @@ void TestFive::runTest()
 	Shader shaderProgram("VertexShaderTwo.vert", "FragmentShaderThree.frag");
 
 	// Rectangle vertices - duplicate vertices only listed once
-	struct Vertex {
+	struct Vertex 
+	{
 		GLfloat position[3];
 		GLfloat color[3];
 		GLfloat uvCoords[2];

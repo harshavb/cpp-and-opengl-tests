@@ -51,6 +51,9 @@
     <ClInclude Include="TestSix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestSeven.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -86,6 +89,9 @@
     <ClCompile Include="TestSix.cpp">
       <Filter>Source Files\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="TestSeven.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Debug\FragmentShaderThree.frag">
@@ -104,6 +110,12 @@
       <Filter>Source Files\Shaders</Filter>
     </None>
     <None Include="..\Debug\VertexShaderThree.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\Debug\VertexShaderFour.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\Debug\FragmentShaderFour.frag">
       <Filter>Source Files\Shaders</Filter>
     </None>
   </ItemGroup>
