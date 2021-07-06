@@ -210,6 +210,13 @@ void TestSeven::runTest()
 
 		glBindVertexArray(VAO);
 
+		// Sets the view matrix
+		glm::mat4 view = glm::mat4(1.0f);
+		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -2.5f + cos(float(glfwGetTime()))));
+		view = glm::rotate(view, float(glfwGetTime()), glm::vec3(0.0f, 0.0f, 1.0f));
+
+		shaderProgram.setMat4("view", view);
+
 		// Sets model matrix for each cube
 		for (unsigned int i = 0; i < 10; i++)
 		{
@@ -222,15 +229,6 @@ void TestSeven::runTest()
 			shaderProgram.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
-
-		// Sets the view matrix
-		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -2.5f + cos(float(glfwGetTime()))));
-		view = glm::rotate(view, float(glfwGetTime()), glm::vec3(0.0f, 0.0f, 1.0f));
-
-		shaderProgram.setMat4("view", view);
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		// Swaps the buffers then checks and calls events (?)
 		glfwSwapBuffers(window);
