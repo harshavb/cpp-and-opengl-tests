@@ -146,6 +146,7 @@
     <ClInclude Include="Program.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TestEight.h" />
     <ClInclude Include="TestFive.h" />
     <ClInclude Include="TestFour.h" />
     <ClInclude Include="TestOne.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="TestEight.cpp" />
     <ClCompile Include="TestFive.cpp" />
     <ClCompile Include="TestFour.cpp" />
     <ClCompile Include="TestOne.cpp" />
