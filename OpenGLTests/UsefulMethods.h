@@ -15,7 +15,15 @@ public:
 	static float processMixing(GLFWwindow* window, float mixPercent);
 	static glm::vec3 processCameraPosition(GLFWwindow* window, glm::vec3 cameraPos, glm::vec3 cameraFront, glm::vec3 cameraUp);
 
+	// Checks mouse for camera rotation and zoom
+	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+	static void scroll_callback(GLFWwindow* window, double xpos, double ypos);
+
+	static glm::vec3 getCameraFront() { return cameraFront; }
+	static float getFov() { return fov; }
+
 private:
-	static float deltaTime;
-	static float lastFrame;
+	static float deltaTime, lastFrame, lastX, lastY, yaw, pitch, fov;
+	static bool firstMouse;
+	static glm::vec3 cameraFront;
 };

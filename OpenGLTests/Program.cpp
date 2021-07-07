@@ -6,6 +6,7 @@
 #include "TestSix.h"
 #include "TestSeven.h"
 #include "TestEight.h"
+#include "TestNine.h""
 
 int main()
 {
@@ -16,6 +17,7 @@ int main()
 	// TestFive::runTest();  // Loads a rectangle with two textures mixed together, using a struct for each vertex
 	// TestSix::runTest();  // Creates two moving rectangles, one scaling and the other rotating, using matrix transformations
 	// TestSeven::runTest();  // Creates a rotating cube, utizilizing a seperate model, view, and projection matrix
-	TestEight::runTest();
+	// TestEight::runTest();  // Allows panning of the camera using arrow keys
+	TestNine::runTest();  // Allows camera rotation and zoom using a mouse
 	return 0;
 }

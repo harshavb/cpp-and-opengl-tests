@@ -149,6 +149,7 @@
     <ClInclude Include="TestEight.h" />
     <ClInclude Include="TestFive.h" />
     <ClInclude Include="TestFour.h" />
+    <ClInclude Include="TestNine.h" />
     <ClInclude Include="TestOne.h" />
     <ClInclude Include="TestSeven.h" />
     <ClInclude Include="TestSix.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="TestEight.cpp" />
     <ClCompile Include="TestFive.cpp" />
     <ClCompile Include="TestFour.cpp" />
+    <ClCompile Include="TestNine.cpp" />
     <ClCompile Include="TestOne.cpp" />
     <ClCompile Include="TestSeven.cpp" />
     <ClCompile Include="TestSix.cpp" />
