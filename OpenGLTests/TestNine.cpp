@@ -7,6 +7,7 @@ void TestNine::runTest()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);  // Defines GL version
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);  // Defines GL version - 4.1 because Mac doesn't support 4.2 to 4.6
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // Sets whether or not to use post 3.0 GL features, pre 3.0 GL features, or both
+	glfwWindowHint(GLFW_SAMPLES, 4); // Creates multisampled buffers for MSAA
 
 	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGLTests", NULL, NULL);  // Creates the GL window
 	if (window == NULL)
@@ -161,6 +162,9 @@ void TestNine::runTest()
 
 	// Enables depth testing
 	glEnable(GL_DEPTH_TEST);
+
+	// Enables MSAA
+	glEnable(GL_MULTISAMPLE);
 
 	// Cube Coordinates
 	glm::vec3 cubePositions[] = {
